@@ -2,6 +2,7 @@ import { Product } from './Product/Product';
 import css from './App.module.css';
 import Section from './Section/Section';
 import { Component } from 'react';
+import ProductForm from './ProductForm/ProductForm';
 
 const productsData = [
   {
@@ -87,7 +88,7 @@ export class App extends Component {
     //////////////
     return (
       <>
-        <Section>
+        <Section title="Hello and counter">
           <h1>Hello</h1>
           {this.state.counterValue >= 5 && (
             <h3>
@@ -98,7 +99,12 @@ export class App extends Component {
           <b>Counter Value: {this.state.counterValue}</b>
           <button onClick={this.handleIncrement}>Increment</button>
         </Section>
-        <Section>
+
+        <Section title="Product Form">
+          <ProductForm />
+        </Section>
+
+        <Section title="Product List">
           <div className={css.productList}>
             {sortedProducts.map(product => {
               return (
