@@ -1,6 +1,12 @@
 import css from './Product.module.css';
 
-export const Product = ({ name, price, discount, id, handleDeleteProduct }) => {
+export const Product = ({
+  title,
+  price,
+  discount,
+  id,
+  handleDeleteProduct,
+}) => {
   const productBg = discount ? '#f37703' : '#a4dbe2';
 
   const productStyles = {
@@ -14,7 +20,7 @@ export const Product = ({ name, price, discount, id, handleDeleteProduct }) => {
         src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?dpr=2&h=480&w=640"
         alt="Tacos With Lime"
       />
-      <h1 className={css.productTitle}>{name}</h1>
+      <h1 className={css.productTitle}>{title}</h1>
       {/* {discount && <h2>Discount: {discount}$</h2>} */}
       {/* //АБО// */}
       {discount ? (
