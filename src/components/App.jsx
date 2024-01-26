@@ -86,8 +86,6 @@ export class App extends Component {
       product => product.title === productData.title
     );
 
-    console.log(productData.title);
-
     if (hasDuplicates) {
       alert(`Oops! Product with title '${productData.title}' already exists`);
       return;
@@ -115,7 +113,7 @@ export class App extends Component {
           <h1>Hello</h1>
           {this.state.counterValue >= 5 && (
             <h3>
-              🎉 Congrats! You won the discount promocode 30% OFF #DW13S4RE77 🎊
+              🎉 Congrats! You won the discount promocode 30% OFF #DW13S4RE7 🎊
             </h3>
           )}
           <button onClick={this.handleDecrement}>Decrement</button>
