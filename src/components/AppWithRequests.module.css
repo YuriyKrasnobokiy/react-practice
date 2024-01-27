@@ -1,0 +1,44 @@
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.postListWrapper {
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.postList {
+  list-style: none;
+  padding: 20px 0;
+  max-width: 700px;
+}
+
+.postItem {
+  padding: 20px;
+  border: 1px solid gray;
+}
+
+.postItem:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.itemTitle {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.itemBody {
+  font-weight: 400;
+  font-size: 18px;
+}
