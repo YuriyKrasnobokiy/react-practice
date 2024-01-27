@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import css from './AppWithRequests.module.css';
+import { Loader } from './Loader/Loader';
 
 export class AppWithRequests extends Component {
   state = {
@@ -21,7 +22,9 @@ export class AppWithRequests extends Component {
         posts: data,
       });
     } catch (error) {
-      console.log(error);
+      this.setState({
+        error: error.message,
+      });
     } finally {
       this.setState({
         isLoading: false,
@@ -37,7 +40,12 @@ export class AppWithRequests extends Component {
     return (
       <div className={css.postListWrapper}>
         <h2>HTTP requests</h2>
-        {this.state.isLoading && <p>Loading...</p>}
+        {this.state.error !== null && (
+          <p className={css.errorMessage}>
+            Oops, some error occured... Error message: {this.state.error}
+          </p>
+        )}
+        {this.state.isLoading && <Loader />}
         <ul className={css.postList}>
           {this.state.posts !== null &&
             this.state.posts.map(post => {

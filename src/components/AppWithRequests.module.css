@@ -25,7 +25,7 @@ h6 {
 
 .postItem {
   padding: 20px;
-  border: 1px solid gray;
+  border: 2px solid green;
 }
 
 .postItem:not(:last-child) {
@@ -41,4 +41,12 @@ h6 {
 .itemBody {
   font-weight: 400;
   font-size: 18px;
+}
+
+.errorMessage {
+  font-size: 24px;
+  padding: 20px;
+  border: 2px dotted rgb(0, 0, 0);
+  background-color: tomato;
+  margin-top: 20px;
 }
