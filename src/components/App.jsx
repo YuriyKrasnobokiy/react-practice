@@ -4,6 +4,7 @@ import Section from './Section/Section';
 import { Component } from 'react';
 import ProductForm from './ProductForm/ProductForm';
 import { nanoid } from 'nanoid';
+import Modal from './Modal/Modal';
 
 const productsData = [
   {
@@ -48,9 +49,29 @@ const productsData = [
 export class App extends Component {
   state = {
     counterValue: 0,
+    isOpenModal: false,
+    modalData: null,
     products: productsData,
   };
 
+  /////ПРИ ОНОВЛЕННІ СТОРІНКИ ПЕРЕВІРКА ЧИ КОРИСТУВАЧ НОВИЙ ТА ЩО ПОКАЗУВАТИ. АБО ЗА ЗАМОВЧУВАННЯМ МАСИВ (productsData) АБО ЙОГО ПРОДУКТИ/////
+  componentDidMount() {
+    const stringifiedProducts = localStorage.getItem('products');
+    const parsedProducts = JSON.parse(stringifiedProducts) ?? productsData;
+    this.setState({
+      products: parsedProducts,
+    });
+  }
+
+  /////ПРИ ЗМІНІ МАСИВУ ПРОДУКТІВ ЙДЕ ЗАПИС У ЛОКАЛЬНЕ СХОВИЩЕ/////
+  componentDidUpdate(_, prevState) {
+    if (prevState.products !== this.state.products) {
+      const stringifiedProducts = JSON.stringify(this.state.products);
+      localStorage.setItem('products', stringifiedProducts);
+    }
+  }
+
+  //////ЗМЕНШЕННЯ ЛІЧИЛЬНИКА//////
   handleDecrement = () => {
     if (this.state.counterValue === 0) {
       alert('Counter value is already decremented!');
@@ -64,7 +85,7 @@ export class App extends Component {
     //OR//
     // this.setState({ counterValue: this.state.counterValue - 1 });
   };
-
+  //////ЗБІЛЬШЕННЯ ЛІЧИЛЬНИКА//////
   handleIncrement = () => {
     this.setState(prevState => {
       return {
@@ -75,12 +96,14 @@ export class App extends Component {
     // this.setState({ counterValue: this.state.counterValue + 1 });
   };
 
+  //////ВИДАЛЕННЯ ПРОДУКТУ//////
   handleDeleteProduct = productId => {
     this.setState({
       products: this.state.products.filter(product => product.id !== productId),
     });
   };
 
+  //////ДОДАВАННЯ ПРОДУКТУ//////
   handleAddProduct = productData => {
     const hasDuplicates = this.state.products.some(
       product => product.title === productData.title
@@ -99,6 +122,22 @@ export class App extends Component {
     this.setState(prevState => ({
       products: [...prevState.products, finalProduct],
     }));
+  };
+
+  //////ВІДКРИТТЯ МОДАЛКИ//////
+  openModal = someDataToModal => {
+    this.setState({
+      isOpenModal: true,
+      modalData: someDataToModal,
+    });
+  };
+
+  //////ЗАКРИТТЯ МОДАЛКИ//////
+  closeModal = () => {
+    this.setState({
+      isOpenModal: false,
+      modalData: null,
+    });
   };
 
   render() {
@@ -136,11 +175,18 @@ export class App extends Component {
                   price={product.price}
                   discount={product.discount}
                   handleDeleteProduct={this.handleDeleteProduct}
+                  openModal={this.openModal}
                 />
               );
             })}
           </div>
         </Section>
+        {this.state.isOpenModal && (
+          <Modal
+            closeModal={this.closeModal}
+            modalData={this.state.modalData}
+          ></Modal>
+        )}
       </>
     );
   }

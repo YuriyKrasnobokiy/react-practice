@@ -21,7 +21,9 @@ export default class ProductForm extends Component {
     };
     this.props.handleAddProduct(productData);
 
-    console.log('Form successfully submitedn 😀', productData);
+    // console.log('Form successfully submitedn 😀', productData);
+
+    this.setState({ title: '', price: '', hasDiscount: false, discount: '' });
   };
 
   handleInputChange = evt => {
