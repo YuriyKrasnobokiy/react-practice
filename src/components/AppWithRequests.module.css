@@ -10,6 +10,16 @@ h6 {
   margin: 0;
 }
 
+ul {
+  list-style: none;
+}
+
+.loader {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
 .postListWrapper {
   max-width: 1200px;
   width: 100%;
@@ -18,14 +28,14 @@ h6 {
 }
 
 .postList {
-  list-style: none;
   padding: 20px 0;
-  max-width: 700px;
+  max-width: 450px;
 }
 
 .postItem {
   padding: 20px;
   border: 2px solid green;
+  cursor: pointer;
 }
 
 .postItem:not(:last-child) {
@@ -49,4 +59,41 @@ h6 {
   border: 2px dotted rgb(0, 0, 0);
   background-color: tomato;
   margin-top: 20px;
+}
+
+.listWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  position: sticky;
+  top: 12px;
+  max-height: 100vh;
+  overflow: auto;
+}
+
+.commentsListItem {
+  padding: 20px;
+  border: 2px solid green;
+}
+.commentsListItem:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.commentName {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.commentEmail {
+  font-weight: 400;
+  font-size: 18px;
+}
+.commentBody {
+  font-weight: 400;
+  font-size: 18px;
 }
