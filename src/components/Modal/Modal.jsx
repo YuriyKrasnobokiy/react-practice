@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyledModal } from './Modal.Styled';
 
 // Методи життєвого циклу - це зарезервовані реактом методи(функції),
@@ -28,66 +28,75 @@ import { StyledModal } from './Modal.Styled';
 //     - Надсилаються мережеві запити (HTTP request)
 //     - Оновлюють(синхронізуються) дані зі стейту з локальним сховищем
 
-export default class Modal extends Component {
-  state = {
-    counter: 1,
-  };
+const Modal = ({ modalData, closeModal }) => {
+  // state = {
+  //   counter: 1,
+  // };
+  const [counter, setCounter] = useState(1);
 
-  componentDidMount() {
-    // console.log('Modal has successfully been mounted');
+  // componentDidMount()
+  useEffect(() => {
+    const handleKeyDown = evt => {
+      if (evt.code === 'Escape') {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
 
-  componentWillUnmount() {
-    // console.log('Modal was successfully deleted');
-    window.removeEventListener('keydown', this.handleKeyDown);
-    document.body.style.overflow = 'auto';
-  }
+    return () => {
+      // componentWillUnmount(
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
+    };
+  }, [closeModal]);
 
-  componentDidUpdate() {
-    // console.log('Modal was updated (PROPS os STATE was changed)');
-  }
+  useEffect(() => {
+    console.log('counter:' + counter);
+  }, [counter]);
+  // componentDidMount() {
+  //   // console.log('Modal has successfully been mounted');
+  //   document.body.style.overflow = 'hidden';
+  //   window.addEventListener('keydown', this.handleKeyDown);
+  // }
 
-  handleIncrementProduct = () => {
-    this.setState(prevState => {
-      return { counter: prevState.counter + 1 };
-    });
+  // componentWillUnmount() {
+  //   // console.log('Modal was successfully deleted');
+  //   window.removeEventListener('keydown', this.handleKeyDown);
+  //   document.body.style.overflow = 'auto';
+  // }
+
+  const handleIncrementProduct = () => {
+    // setCounter(counter + 1);
+    /////АБО/////
+    setCounter(prevState => prevState + 1);
   };
 
-  handleOverlayClick = evt => {
+  const handleOverlayClick = evt => {
     if (evt.target === evt.currentTarget) {
-      this.props.closeModal();
-    }
-  };
-  handleKeyDown = evt => {
-    if (evt.code === 'Escape') {
-      this.props.closeModal();
+      closeModal();
     }
   };
 
-  render() {
-    return (
-      <StyledModal onClick={this.handleOverlayClick}>
-        <div className="modal">
-          <button
-            onClick={this.props.closeModal}
-            type="button"
-            className="closeBtn"
-          >
-            &times;
+  return (
+    <StyledModal onClick={handleOverlayClick}>
+      <div className="modal">
+        <button onClick={closeModal} type="button" className="closeBtn">
+          &times;
+        </button>
+        <h2>Product details</h2>
+        <div>
+          <h3>Title: {modalData.title}</h3>
+          <p>Price: {modalData.price}$</p>
+          <p>Discount: {modalData.discount}$</p>
+          <button onClick={handleIncrementProduct}>
+            Add product: {counter}
           </button>
-          <h2>Product details</h2>
-          <div>
-            <h3>Title: {this.props.modalData.title}</h3>
-            <p>Price: {this.props.modalData.price}$</p>
-            <p>Discount: {this.props.modalData.discount}$</p>
-            <button onClick={this.handleIncrementProduct}>
-              Add product: {this.state.counter}
-            </button>
-          </div>
         </div>
-      </StyledModal>
-    );
-  }
-}
+      </div>
+    </StyledModal>
+  );
+};
+
+export default Modal;

@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import { App } from 'components/App';
+
 import './index.css';
-import { AppWithRequests } from 'components/AppWithRequests';
+import { App } from 'components/App';
+// import { AppWithRequests } from 'components/AppWithRequests';
 
 // {
 //   "userId": 1,
@@ -12,8 +13,7 @@ import { AppWithRequests } from 'components/AppWithRequests';
 // },
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-  // <App />
-  <AppWithRequests />
-  // </React.StrictMode>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
