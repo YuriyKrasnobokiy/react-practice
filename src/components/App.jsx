@@ -50,23 +50,20 @@ export const App = () => {
   const [counterValue, setCounterValue] = useState(0);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalData, setModalData] = useState(null);
-  const [products, setProducts] = useState(productsData);
-  // state = {
-  //   counterValue: 0,
-  //   isOpenModal: false,
-  //   modalData: null,
-  //   products: productsData,
-  // };
+  // const [products, setProducts] = useState(productsData);
+  const [products, setProducts] = useState(() => {
+    const stringifiedProducts = localStorage.getItem('products');
+    const parsedProducts = JSON.parse(stringifiedProducts) ?? productsData;
+    return parsedProducts;
+  });
+
+  useEffect(() => {
+    const stringifiedProducts = JSON.stringify(products);
+    localStorage.setItem('products', stringifiedProducts);
+    // return products;
+  }, [products]);
 
   /////ПРИ ОНОВЛЕННІ СТОРІНКИ ПЕРЕВІРКА ЧИ КОРИСТУВАЧ НОВИЙ ТА ЩО ПОКАЗУВАТИ. АБО ЗА ЗАМОВЧУВАННЯМ МАСИВ (productsData) АБО ЙОГО ПРОДУКТИ/////
-  // useEffect(() => {
-  //   const stringifiedProducts = localStorage.getItem('products');
-  //   const parsedProducts = JSON.parse(stringifiedProducts) ?? productsData;
-  //   setProducts({
-  //     products: parsedProducts,
-  //   });
-  // }, []);
-
   // const componentDidMount() {
   //   const stringifiedProducts = localStorage.getItem('products');
   //   const parsedProducts = JSON.parse(stringifiedProducts) ?? productsData;
