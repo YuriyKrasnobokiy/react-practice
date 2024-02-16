@@ -1,6 +1,6 @@
 import React from 'react';
 import { RotatingLines } from 'react-loader-spinner';
-import css from '../AppWithRequests.module.css';
+import css from '../../pages/PostPage.module.css';
 
 export const Loader = () => {
   return (

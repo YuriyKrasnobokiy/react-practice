@@ -1,17 +1,10 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import css from './AppWithRequests.module.css';
-import { Loader } from './Loader/Loader';
+import css from '../pages/PostPage.module.css';
+import { Loader } from '../components/Loader/Loader';
+import { Link } from 'react-router-dom';
 
-// {
-//   "postId": 1,
-//   "id": 1,
-//   "name": "id labore ex et quam laborum",
-//   "email": "Eliseo@gardner.biz",
-//   "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
-// },
-
-export class AppWithRequests extends Component {
+export class PostsPage extends Component {
   state = {
     posts: null,
     comments: null,
@@ -97,11 +90,13 @@ export class AppWithRequests extends Component {
                 return (
                   <li
                     key={post.id}
-                    onClick={() => this.onSelectPostID(post.id)}
+                    // onClick={() => this.onSelectPostID(post.id)}
                     className={css.postItem}
                   >
-                    <h2 className={css.itemTitle}>{post.title}</h2>
-                    <p className={css.itemBody}>{post.body}</p>
+                    <Link to={`/posts/${post.id}`}>
+                      <h2 className={css.itemTitle}>{post.title}</h2>
+                      <p className={css.itemBody}>{post.body}</p>
+                    </Link>
                   </li>
                 );
               })}

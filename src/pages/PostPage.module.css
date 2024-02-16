@@ -97,3 +97,14 @@ ul {
   font-weight: 400;
   font-size: 18px;
 }
+
+.postDetailsTitle {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.postDetailsBody {
+  font-weight: 400;
+  font-size: 18px;
+}
