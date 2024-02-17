@@ -45,8 +45,7 @@ const productsData = [
   },
 ];
 
-////Class Component////
-export const ProductsPage = () => {
+const ProductsPage = () => {
   const [counterValue, setCounterValue] = useState(0);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalData, setModalData] = useState(null);
@@ -162,3 +161,5 @@ export const ProductsPage = () => {
     </div>
   );
 };
+
+export default ProductsPage;
