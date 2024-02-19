@@ -1,4 +1,7 @@
+import { useDispatch } from 'react-redux';
 import css from './Product.module.css';
+import { openModal } from '../../redux/modal/modal.reducer';
+import { ReactComponent as IconTrash } from 'assets/icons/trashSvg.svg';
 
 export const Product = ({
   title,
@@ -6,8 +9,9 @@ export const Product = ({
   discount,
   id,
   handleDeleteProduct,
-  openModal,
 }) => {
+  const dispatch = useDispatch();
+
   const productBg = discount ? '#f37703' : '#a4dbe2';
 
   const productStyles = {
@@ -36,7 +40,7 @@ export const Product = ({
         Add product to cart
       </button>
       <button
-        onClick={() => openModal({ title, price, discount })}
+        onClick={() => dispatch(openModal({ title, price, discount }))}
         className={css.poductBtn}
         type="button"
       >
@@ -47,7 +51,7 @@ export const Product = ({
         className={css.poductBtn}
         type="button"
       >
-        &times;
+        <IconTrash />
       </button>
     </div>
   );

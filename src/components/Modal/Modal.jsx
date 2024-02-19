@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyledModal } from './Modal.Styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal } from '../../redux/modal/modal.reducer';
 
 // Методи життєвого циклу - це зарезервовані реактом методи(функції),
 //  які запускаються в певний період життя компоненти самим Реактом.
@@ -28,17 +30,17 @@ import { StyledModal } from './Modal.Styled';
 //     - Надсилаються мережеві запити (HTTP request)
 //     - Оновлюють(синхронізуються) дані зі стейту з локальним сховищем
 
-const Modal = ({ modalData, closeModal }) => {
-  // state = {
-  //   counter: 1,
-  // };
+export const Modal = () => {
+  const modalData = useSelector(state => state.modal.modalData);
+
+  const dispatch = useDispatch();
   const [counter, setCounter] = useState(1);
 
   // componentDidMount()
   useEffect(() => {
     const handleKeyDown = evt => {
       if (evt.code === 'Escape') {
-        closeModal();
+        dispatch(closeModal());
       }
     };
 
@@ -50,10 +52,10 @@ const Modal = ({ modalData, closeModal }) => {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'auto';
     };
-  }, [closeModal]);
+  }, [dispatch]);
 
   useEffect(() => {
-    console.log('counter:' + counter);
+    // console.log('counter:' + counter);
   }, [counter]);
   // componentDidMount() {
   //   // console.log('Modal has successfully been mounted');
@@ -75,14 +77,20 @@ const Modal = ({ modalData, closeModal }) => {
 
   const handleOverlayClick = evt => {
     if (evt.target === evt.currentTarget) {
-      closeModal();
+      dispatch(closeModal());
+    }
+  };
+
+  const handleCloseClick = evt => {
+    if (evt.target === evt.currentTarget) {
+      dispatch(closeModal());
     }
   };
 
   return (
     <StyledModal onClick={handleOverlayClick}>
       <div className="modal">
-        <button onClick={closeModal} type="button" className="closeBtn">
+        <button onClick={handleCloseClick} type="button" className="closeBtn">
           &times;
         </button>
         <h2>Product details</h2>

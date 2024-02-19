@@ -1,17 +1,19 @@
 import { Product } from '../components/Product/Product';
 import css from '../components/App.module.css';
 import Section from '../components/Section/Section';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ProductForm from '../components/ProductForm/ProductForm';
 import { nanoid } from 'nanoid';
 import Modal from '../components/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
+import { addProduct, deleteProduct } from '../redux/products/products.reducer';
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
   const [counterValue, setCounterValue] = useState(0);
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [modalData, setModalData] = useState(null);
+  // const [isOpenModal, setIsOpenModal] = useState(false);
+  const isOpenModal = useSelector(state => state.modal.isOpenModal);
+  // const [modalData, setModalData] = useState(null);
 
   const products = useSelector(state => state.productsStore.products);
 
@@ -23,10 +25,10 @@ const ProductsPage = () => {
   // });
 
   ///ПРИ ЗМІНІ МАСИВУ ПРОДУКТІВ ЙДЕ ЗАПИС У ЛОКАЛЬНЕ СХОВИЩЕ/////
-  useEffect(() => {
-    const stringifiedProducts = JSON.stringify(products);
-    localStorage.setItem('products', stringifiedProducts);
-  }, [products]);
+  // useEffect(() => {
+  //   const stringifiedProducts = JSON.stringify(products);
+  //   localStorage.setItem('products', stringifiedProducts);
+  // }, [products]);
 
   //////ЗМЕНШЕННЯ ЛІЧИЛЬНИКА//////
   const handleDecrement = () => {
@@ -48,12 +50,12 @@ const ProductsPage = () => {
 
   //////ВИДАЛЕННЯ ПРОДУКТУ//////
   const handleDeleteProduct = productId => {
-    const deleteProductAction = {
-      type: 'products/deleteProduct',
-      payload: productId,
-    };
+    // const deleteProductAction = {
+    //   type: 'products/deleteProduct',
+    //   payload: productId,
+    // };
 
-    dispatch(deleteProductAction);
+    dispatch(deleteProduct(productId));
   };
   //////ДОДАВАННЯ ПРОДУКТУ//////
   const handleAddProduct = productData => {
@@ -71,24 +73,24 @@ const ProductsPage = () => {
       id: nanoid(),
     };
 
-    const addProductAction = {
-      type: 'products/addProduct',
-      payload: finalProduct,
-    };
-    dispatch(addProductAction);
+    // const addProductAction = {
+    //   type: 'products/addProduct',
+    //   payload: finalProduct,
+    // };
+    dispatch(addProduct(finalProduct));
   };
 
-  //////ВІДКРИТТЯ МОДАЛКИ//////
-  const openModal = someDataToModal => {
-    setIsOpenModal(true);
-    setModalData(someDataToModal);
-  };
+  // //////ВІДКРИТТЯ МОДАЛКИ//////
+  // const openModal = someDataToModal => {
+  //   setIsOpenModal(true);
+  //   setModalData(someDataToModal);
+  // };
 
-  //////ЗАКРИТТЯ МОДАЛКИ//////
-  const closeModal = () => {
-    setIsOpenModal(false);
-    setModalData(null);
-  };
+  // //////ЗАКРИТТЯ МОДАЛКИ//////
+  // const closeModal = () => {
+  //   setIsOpenModal(false);
+  //   setModalData(null);
+  // };
 
   //СОРТУВАННЯ ПРОДУКТІВ: ПЕРШІ ЗІ ЗНИЖКОЮ ЙДУТЬ//
   const sortedProducts = [...products].sort((a, b) => b.discount - a.discount);
@@ -122,15 +124,12 @@ const ProductsPage = () => {
                 price={product.price}
                 discount={product.discount}
                 handleDeleteProduct={handleDeleteProduct}
-                openModal={openModal}
               />
             );
           })}
         </div>
       </Section>
-      {isOpenModal && (
-        <Modal closeModal={closeModal} modalData={modalData}></Modal>
-      )}
+      {isOpenModal && <Modal />}
     </div>
   );
 };

@@ -1,13 +1,37 @@
-import { combineReducers, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { productsReducer } from './products/products.reducer';
-import { devToolsEnhancer } from '@redux-devtools/extension';
+import { modalReducer } from './modal/modal.reducer';
 
-////Типу стейт////
-const rootReducer = combineReducers({
-  productsStore: productsReducer,
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+const productsConfig = {
+  key: 'products',
+  storage,
+  whitelist: ['products'],
+  // blacklist: ['isLoading', 'error'],
+};
+
+export const store = configureStore({
+  reducer: {
+    productsStore: persistReducer(productsConfig, productsReducer),
+    modal: modalReducer,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
-////Створюємо розширення стора, щоб додати інструменти розробника////
-const enhancer = devToolsEnhancer();
-
-export const store = createStore(rootReducer, enhancer);
+export const persistor = persistStore(store);
