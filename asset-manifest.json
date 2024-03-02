@@ -1,28 +1,26 @@
 {
   "files": {
     "main.css": "/react-practice/static/css/main.d8969a0b.css",
-    "main.js": "/react-practice/static/js/main.d2f06ced.js",
+    "main.js": "/react-practice/static/js/main.2c0b0988.js",
     "static/js/983.149f7526.chunk.js": "/react-practice/static/js/983.149f7526.chunk.js",
     "static/js/953.1b6d97eb.chunk.js": "/react-practice/static/js/953.1b6d97eb.chunk.js",
-    "static/js/27.69acabde.chunk.js": "/react-practice/static/js/27.69acabde.chunk.js",
+    "static/js/27.f507b7ca.chunk.js": "/react-practice/static/js/27.f507b7ca.chunk.js",
     "static/css/757.8f8f507a.chunk.css": "/react-practice/static/css/757.8f8f507a.chunk.css",
     "static/js/757.de743a9a.chunk.js": "/react-practice/static/js/757.de743a9a.chunk.js",
     "static/js/787.9ce91d03.chunk.js": "/react-practice/static/js/787.9ce91d03.chunk.js",
-    "static/js/294.5c621e01.chunk.js": "/react-practice/static/js/294.5c621e01.chunk.js",
     "index.html": "/react-practice/index.html",
     "static/media/trashSvg.svg": "/react-practice/static/media/trashSvg.f0a60164e1d296eb70ee32f8e9e60e80.svg",
     "main.d8969a0b.css.map": "/react-practice/static/css/main.d8969a0b.css.map",
-    "main.d2f06ced.js.map": "/react-practice/static/js/main.d2f06ced.js.map",
+    "main.2c0b0988.js.map": "/react-practice/static/js/main.2c0b0988.js.map",
     "983.149f7526.chunk.js.map": "/react-practice/static/js/983.149f7526.chunk.js.map",
     "953.1b6d97eb.chunk.js.map": "/react-practice/static/js/953.1b6d97eb.chunk.js.map",
-    "27.69acabde.chunk.js.map": "/react-practice/static/js/27.69acabde.chunk.js.map",
+    "27.f507b7ca.chunk.js.map": "/react-practice/static/js/27.f507b7ca.chunk.js.map",
     "757.8f8f507a.chunk.css.map": "/react-practice/static/css/757.8f8f507a.chunk.css.map",
     "757.de743a9a.chunk.js.map": "/react-practice/static/js/757.de743a9a.chunk.js.map",
-    "787.9ce91d03.chunk.js.map": "/react-practice/static/js/787.9ce91d03.chunk.js.map",
-    "294.5c621e01.chunk.js.map": "/react-practice/static/js/294.5c621e01.chunk.js.map"
+    "787.9ce91d03.chunk.js.map": "/react-practice/static/js/787.9ce91d03.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d8969a0b.css",
-    "static/js/main.d2f06ced.js"
+    "static/js/main.2c0b0988.js"
   ]
 }
