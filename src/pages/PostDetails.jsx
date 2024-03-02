@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { Loader } from 'components/Loader/Loader';
-import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useRef } from 'react';
 import {
   Link,
   NavLink,
@@ -10,32 +9,23 @@ import {
   useParams,
 } from 'react-router-dom';
 import css from '../pages/PostPage.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPostDetails } from '../redux/postDetails/postDetails.reducer';
+
 const PostComments = lazy(() => import('pages/PostComments'));
 
 const PostDetails = () => {
   const { postId } = useParams();
-  const [postDetails, setPostDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const location = useLocation();
   const backLinkRef = useRef(location.state?.from ?? '/');
-  useEffect(() => {
-    const fetchPostDetails = async () => {
-      try {
-        setIsLoading(true);
-        const { data } = await axios.get(
-          `https://jsonplaceholder.typicode.com/posts/${postId}`
-        );
-        setPostDetails(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const dispatch = useDispatch();
+  const postDetails = useSelector(state => state.magazine.postDetails);
+  const isLoading = useSelector(state => state.magazine.isLoading);
+  const error = useSelector(state => state.magazine.error);
 
-    fetchPostDetails();
-  }, [postId]);
+  useEffect(() => {
+    dispatch(fetchPostDetails(postId));
+  }, [postId, dispatch]);
 
   return (
     <>
