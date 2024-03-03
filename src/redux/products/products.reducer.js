@@ -45,6 +45,9 @@ const initialState = {
   ////Дані беруть або зі сховища або стандартні з масиву об'єктів productsData////
   // products: JSON.parse(localStorage.getItem('products')) ?? productsData,
   products: [],
+  isLoading: false,
+  error: null,
+  filterTerm: '',
 };
 
 const productsSlice = createSlice({
@@ -54,6 +57,9 @@ const productsSlice = createSlice({
   initialState,
   // Об'єкт редюсерів
   reducers: {
+    setFilterTerm(state, action) {
+      state.filterTerm = action.payload;
+    },
     addProduct(state, action) {
       // state.products = [...state.products, action.payload];
       //або//
@@ -68,6 +74,7 @@ const productsSlice = createSlice({
 });
 
 // Генератори екшен кріейтерів
-export const { addProduct, deleteProduct } = productsSlice.actions;
+export const { addProduct, deleteProduct, setFilterTerm } =
+  productsSlice.actions;
 // Редюсер слайсу
 export const productsReducer = productsSlice.reducer;

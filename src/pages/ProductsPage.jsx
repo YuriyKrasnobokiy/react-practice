@@ -7,16 +7,21 @@ import { nanoid } from 'nanoid';
 import Modal from '../components/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, deleteProduct } from '../redux/products/products.reducer';
+import Filter from 'components/Filter/Filter';
+import { selectIsOpenModal } from '../redux/modal/modal.selectors';
+import {
+  selectFilteredProducts,
+  selectProducts,
+  // selectProductsFilterTerm,
+} from '../redux/products/products.selectors';
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
   const [counterValue, setCounterValue] = useState(0);
-  // const [isOpenModal, setIsOpenModal] = useState(false);
-  const isOpenModal = useSelector(state => state.modal.isOpenModal);
-  // const [modalData, setModalData] = useState(null);
-
-  const products = useSelector(state => state.productsStore.products);
-
+  const isOpenModal = useSelector(selectIsOpenModal);
+  // const filterTerm = useSelector(selectProductsFilterTerm);
+  const products = useSelector(selectProducts);
+  const filteredProducts = useSelector(selectFilteredProducts);
   /////ПРИ ОНОВЛЕННІ СТОРІНКИ ПЕРЕВІРКА ЧИ КОРИСТУВАЧ НОВИЙ ТА ЩО ПОКАЗУВАТИ. АБО ЗА ЗАМОВЧУВАННЯМ МАСИВ (productsData) АБО ЙОГО ПРОДУКТИ/////
   // const [products, setProducts] = useState(() => {
   //   const stringifiedProducts = localStorage.getItem('products');
@@ -80,20 +85,27 @@ const ProductsPage = () => {
     dispatch(addProduct(finalProduct));
   };
 
-  // //////ВІДКРИТТЯ МОДАЛКИ//////
-  // const openModal = someDataToModal => {
-  //   setIsOpenModal(true);
-  //   setModalData(someDataToModal);
-  // };
+  // ////ФІЛЬТРАЦІЯ ПРОДУКТІВ////
+  // const filteredProducts = products.filter(
+  //   ({ title, price }) =>
+  //     title.toLowerCase().includes(filterTerm.toLowerCase().trim()) ||
+  //     price.toString().includes(filterTerm.toLowerCase().trim())
+  // );
+  //////ДЛЯ ОПТИМІЗАЦІЇ МОЖНА ВИКОРИСТАТИ МЕМОЇЗАЦІЮ////
+  // const filteredProducts = useMemo(
+  //   () =>
+  //     products.filter(
+  //       ({ title, price }) =>
+  //         title.toLowerCase().include  s(filterTerm.toLowerCase().trim()) ||
+  //         price.toString().includes(filterTerm.toLowerCase().trim())
+  //     ),
+  //   [filterTerm, products]
+  // );
 
-  // //////ЗАКРИТТЯ МОДАЛКИ//////
-  // const closeModal = () => {
-  //   setIsOpenModal(false);
-  //   setModalData(null);
-  // };
-
-  //СОРТУВАННЯ ПРОДУКТІВ: ПЕРШІ ЗІ ЗНИЖКОЮ ЙДУТЬ//
-  const sortedProducts = [...products].sort((a, b) => b.discount - a.discount);
+  ////СОРТУВАННЯ ПРОДУКТІВ: ПЕРШІ ЗІ ЗНИЖКОЮ ЙДУТЬ////
+  const sortedProducts = [...filteredProducts].sort(
+    (a, b) => b.discount - a.discount
+  );
   //////////////
   return (
     <div>
@@ -111,6 +123,10 @@ const ProductsPage = () => {
 
       <Section title="Product Form">
         <ProductForm handleAddProduct={handleAddProduct} />
+      </Section>
+
+      <Section title="Filter Product">
+        <Filter />
       </Section>
 
       <Section title="Product List">
