@@ -1,12 +1,15 @@
 import { Suspense, lazy } from 'react';
 import Layout from './Layout/Layout';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Loader } from './Loader/Loader';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const PostsPage = lazy(() => import('pages/PostsPage'));
 const PostDetails = lazy(() => import('pages/PostDetails'));
 const ProductsPage = lazy(() => import('pages/ProductsPage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage'));
 
 // 1. Обгорнути весь App в компонент BrowserRouter
 // 2. Прописати маршрути та компоненти Link|NavLink
@@ -34,9 +37,13 @@ export const App = () => {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/posts" element={<PostsPage />} />
           <Route path="/posts/:postId/*" element={<PostDetails />} />
-          <Route path="/products" element={<ProductsPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
     </Layout>

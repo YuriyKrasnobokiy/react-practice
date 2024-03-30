@@ -8,7 +8,6 @@ export const fetchPostDetails = createAsyncThunk(
       const { data } = await axios.get(
         `https://jsonplaceholder.typicode.com/posts/${postId}`
       );
-      console.log('data: ', data);
       ////ЦУ БЦДЕ ЗАПИСАНО В ACTION.PAYLOAD РЕДЮСЕРУ////
       return data;
     } catch (err) {

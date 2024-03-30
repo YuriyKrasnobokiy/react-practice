@@ -9,11 +9,20 @@ const Layout = ({ children }) => {
         <NavLink className="header-link" to="/">
           Home
         </NavLink>
-        <NavLink className="header-link" to="/posts">
-          Posts
+        <NavLink className="header-link" to="/login">
+          Login
+        </NavLink>
+        <NavLink className="header-link" to="/register">
+          Register
+        </NavLink>
+        <NavLink className="header-link" to="/contacts">
+          Contacts
         </NavLink>
         <NavLink className="header-link" to="/products">
           Products
+        </NavLink>
+        <NavLink className="header-link" to="/posts">
+          Posts
         </NavLink>
       </header>
       <main>{children}</main>
