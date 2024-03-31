@@ -8,14 +8,14 @@ import {
 const RegisterPage = () => {
   const handleOnSubmit = evt => {
     evt.preventDefault();
-    const name = evt.currentTarget.userName.value;
-    const email = evt.currentTarget.elements.userEmail.value;
-    const password = evt.currentTarget.elements.userPassword.value;
-    const formData = {
-      name,
-      email,
-      password,
-    };
+    // const name = evt.currentTarget.userName.value;
+    // const email = evt.currentTarget.elements.userEmail.value;
+    // const password = evt.currentTarget.elements.userPassword.value;
+    // const formData = {
+    //   name,
+    //   email,
+    //   password,
+    // };
   };
 
   return (

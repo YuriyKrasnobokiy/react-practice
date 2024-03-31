@@ -5,16 +5,17 @@ export const instance = axios.create({
   baseUrl: 'https://connections-api.herokuapp.com/',
 });
 
-const setToken = token => {
-  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+instance.defaults.baseURL = 'https://connections-api.herokuapp.com';
+
+// const setToken = token => {
+//   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+// };
 
 export const loginThunk = createAsyncThunk(
   'auth/login',
   async (formData, thynkApi) => {
     try {
-      const { data } = await instance.post('/users/login', formData);
-      setToken(data);
+      const { data } = await axios.post('/users/login', formData);
       return data;
     } catch (err) {
       return thynkApi.rejectWithValue(err.message);

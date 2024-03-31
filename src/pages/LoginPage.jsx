@@ -19,6 +19,7 @@ const LoginPage = () => {
       email,
       password,
     };
+    console.log('formData: ', formData);
 
     dispatch(loginThunk(formData));
   };
