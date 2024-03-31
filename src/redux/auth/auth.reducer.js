@@ -14,7 +14,7 @@ export const loginThunk = createAsyncThunk(
   async (formData, thynkApi) => {
     try {
       const { data } = await instance.post('/users/login', formData);
-
+      setToken(data);
       return data;
     } catch (err) {
       return thynkApi.rejectWithValue(err.message);
