@@ -7,36 +7,6 @@ import { createSlice } from '@reduxjs/toolkit';
 //     price: 10.99,
 //     discount: 2,
 //   },
-//   {
-//     id: 'hfkfhkdh',
-//     title: 'Tacos With Lime L',
-//     price: 8.99,
-//     discount: null,
-//   },
-//   {
-//     id: 'dfhfcwtx',
-//     title: 'Tacos With Lime',
-//     price: 6.99,
-//     discount: 6,
-//   },
-//   {
-//     id: 'zvzvdedw',
-//     title: 'Tacos With Lime S',
-//     price: 2.99,
-//     discount: 0.5,
-//   },
-//   {
-//     id: 'diqrwmsk',
-//     title: 'Tacos With Cheese',
-//     price: 7.99,
-//     discount: null,
-//   },
-//   {
-//     id: 'thskifhf',
-//     title: 'Tacos With Cheese L',
-//     price: 9.99,
-//     discount: 1.5,
-//   },
 // ];
 
 ////Початковий стан редюсера (обов'язково!!!)////
